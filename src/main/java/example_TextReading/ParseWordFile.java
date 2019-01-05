@@ -15,6 +15,7 @@ import com.findSource.FindMessageFromForum;
 import com.findSource.FindThesisSource;
 import com.findSource.FindTranslateSource;
 import com.findSource.FindWebSiteSource;
+import com.puctuation.CounterPunctuation;
 
 public class ParseWordFile {
 
@@ -191,6 +192,31 @@ public class ParseWordFile {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		//===============================================================================
+		
+		CounterPunctuation cp = new CounterPunctuation();
+		String arrayIndexOfText = newSources.get(0).replaceAll("\\s", "");
+		System.out.println("ArrayIndexOfText = "+arrayIndexOfText);
+		int howManyPoint = cp.CounterPunctuations(arrayIndexOfText,".");
+		System.out.println("Bu stringde "+ howManyPoint+ " kadar nokta vardýr");
+		int howManyComma = cp.CounterPunctuations(arrayIndexOfText,",");
+		System.out.println("Bu stringde "+ howManyComma+ " kadar virgül vardýr");
+		int howManyColon = cp.CounterPunctuations(arrayIndexOfText, ":");
+		System.out.println("Bu stringde "+howManyColon + " kadar iki nokta üst üste vardýr");
+		
+		//===============================================================================
+		
+		String parseIndexOfNewSources = newSources.get(1);
+		System.out.println(parseIndexOfNewSources);
+		String[] parsedStringWithPoint = parseIndexOfNewSources.split("\\.");
+		System.out.println(parsedStringWithPoint.length);
+		for(int i=0;i<parsedStringWithPoint.length;i++) {
+			System.out.println(parsedStringWithPoint[i]);
+		}
+		
+		
+		
 	}
 
 }
