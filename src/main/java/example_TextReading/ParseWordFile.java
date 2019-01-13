@@ -45,12 +45,12 @@ public class ParseWordFile {
 		List<String> sources = new ArrayList<String>();
 
 		for (int i = 0; i < source.length; i++) {
-			if (source[i] != "") {
-				sources.add(source[i]);
+			String s = source[i].trim();
+			System.out.println(s+ " : " +s.length());
+			if (s.length()!=0) {
+				sources.add(s);
 			}
 		}
-
-		System.out.println("Sources size : " + sources.size());
 
 		for (int i = 0; i < sources.size(); i++) {
 			System.out.println(i + ". " + sources.get(i));
@@ -207,7 +207,7 @@ public class ParseWordFile {
 		
 		//===============================================================================
 		
-		String parseIndexOfNewSources = newSources.get(1);
+		String parseIndexOfNewSources = "Kazgan, G. (2000).Ýktisadi düþünce (9. Baský).Ýstanbul: Remzi Kitabevi.";
 		System.out.println(parseIndexOfNewSources);
 		String[] parsedStringWithPoint = parseIndexOfNewSources.split("\\.");
 		System.out.println(parsedStringWithPoint.length);
