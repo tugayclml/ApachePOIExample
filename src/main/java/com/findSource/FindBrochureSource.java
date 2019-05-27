@@ -19,5 +19,15 @@ public class FindBrochureSource {
 		}
 		return brochureSource;
 	}
+	
+	public Boolean isBrochureReference(String reference) {
+		CharSequence cs="[Broþür]",cs2="[Brochure]";
+		if(reference.contains(cs) || reference.contains(cs2)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 }

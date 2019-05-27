@@ -39,4 +39,26 @@ public class AudioVisualMedia {
 		return audioVisualSource;
 	}
 	
+	public Boolean isAudioVisualReference(String reference) {
+		List<CharSequence> charSequences = new ArrayList<CharSequence>();
+		charSequences.add("[Film]");
+		charSequences.add("(Yapýmcý)");
+		charSequences.add("(Yönetmen)");
+		charSequences.add("[Televizyon programý]");
+		charSequences.add("[CD]");
+		charSequences.add("[DVD]");
+		charSequences.add("[Motion picture]");
+		charSequences.add("(Director)");
+		charSequences.add("(Producer)");
+		charSequences.add("[Television broadcast]");
+		
+		for(int i=0;i<charSequences.size();i++) {
+			if(reference.contains(charSequences.get(i))) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 }

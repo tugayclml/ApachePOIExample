@@ -45,7 +45,6 @@ public class ChooseDocxDocument extends Application{
 			File file = fileChooser.showOpenDialog(window);
 			if(file!=null) {
 				path = file.getAbsolutePath();
-				System.out.println(path);
 				content = readFile(path);
 			}
 			window.setScene(referencesScene);
@@ -57,7 +56,6 @@ public class ChooseDocxDocument extends Application{
 		showList.setOnAction(e -> {
 			list = findReferences(content);
 			for(int i=0;i<list.size();i++) {
-				System.out.println(i + " : " + list.get(i));
 				listView.getItems().add(list.get(i));
 			}
 		});
@@ -70,7 +68,6 @@ public class ChooseDocxDocument extends Application{
 		centerMenu.getChildren().add(listView);
 		centerMenu.setAlignment(Pos.CENTER);
 		
-		//=====================================================================
 		FindEditorSource editorReference = new FindEditorSource();
 		ed = new ArrayList<>();
 		Button findEditor = new Button("Find Editor");
@@ -78,7 +75,6 @@ public class ChooseDocxDocument extends Application{
 			ed = editorReference.findEditorSource(list);
 			listView.getItems().removeAll(list);
 			for(int i=0;i<ed.size();i++) {
-				System.out.println(ed.get(i));
 				listView.getItems().add(ed.get(i));
 			}
 		});
@@ -86,14 +82,7 @@ public class ChooseDocxDocument extends Application{
 		FindTranslateSource translaterReference = new FindTranslateSource();
 		trans = new ArrayList<>();
 		Button findTranslate = new Button("Find Translate");
-		findTranslate.setOnAction(e -> {
-			trans = translaterReference.findTranslateSource(list);
-			listView.getItems().removeAll(list);
-			for(int i=0;i<trans.size();i++) {
-				System.out.println(trans.get(i));
-				listView.getItems().add(trans.get(i));
-			}
-		});
+		extracted(translaterReference, findTranslate);
 		
 		FindThesisSource thesisRefenrence = new FindThesisSource();
 		thesis = new ArrayList<>();
@@ -102,7 +91,6 @@ public class ChooseDocxDocument extends Application{
 			thesis = thesisRefenrence.findThesisSource(list);
 			listView.getItems().removeAll(list);
 			for(int i=0;i<thesis.size();i++) {
-				System.out.println(thesis.get(i));
 				listView.getItems().add(thesis.get(i));
 			}
 		});
@@ -114,7 +102,6 @@ public class ChooseDocxDocument extends Application{
 			brochure = brochureRefenrence.findBrochureSource(list);
 			listView.getItems().removeAll(list);
 			for(int i=0;i<brochure.size();i++) {
-				System.out.println(brochure.get(i));
 				listView.getItems().add(brochure.get(i));
 			}
 		});
@@ -126,7 +113,6 @@ public class ChooseDocxDocument extends Application{
 			audio = audioReference.findAudioVisualMediaSource(list);
 			listView.getItems().removeAll(list);
 			for(int i=0;i<audio.size();i++) {
-				System.out.println(audio.get(i));
 				listView.getItems().add(audio.get(i));
 			}
 		});
@@ -138,7 +124,6 @@ public class ChooseDocxDocument extends Application{
 			database = databaseReference.findDatabaseSource(list);
 			listView.getItems().removeAll(list);
 			for(int i=0;i<database.size();i++) {
-				System.out.println(database.get(i));
 				listView.getItems().add(database.get(i));
 			}
 		});
@@ -150,7 +135,6 @@ public class ChooseDocxDocument extends Application{
 			encyclopedia = encyclopediaReference.findEncyclopediaSource(list);
 			listView.getItems().removeAll(list);
 			for(int i=0;i<encyclopedia.size();i++) {
-				System.out.println(encyclopedia.get(i));
 				listView.getItems().add(encyclopedia.get(i));
 			}
 		});
@@ -162,7 +146,6 @@ public class ChooseDocxDocument extends Application{
 			messageForum = messageFromForumReference.findMessageFromForum(list);
 			listView.getItems().removeAll(list);
 			for(int i=0;i<messageForum.size();i++) {
-				System.out.println(messageForum.get(i));
 				listView.getItems().add(messageForum.get(i));
 			}
 		});
@@ -174,7 +157,6 @@ public class ChooseDocxDocument extends Application{
 			webSites = webSiteReference.findWebSiteSource(list);
 			listView.getItems().removeAll(list);
 			for(int i=0;i<webSites.size();i++) {
-				System.out.println(webSites.get(i));
 				listView.getItems().add(webSites.get(i));
 			}
 		});
@@ -186,21 +168,15 @@ public class ChooseDocxDocument extends Application{
 			noAuthor = noAuthorReference.findNoAuthorNoDate(list);
 			listView.getItems().removeAll(list);
 			for(int i=0;i<noAuthor.size();i++) {
-				System.out.println(noAuthor.get(i));
 				listView.getItems().add(noAuthor.get(i));
 			}
 		});
-		
-		
-		
 		
 		VBox rightMenu = new VBox();
 		rightMenu.getChildren().addAll(findEditor,findTranslate,findThesis,findBrochure,findAudio,findDatabase,
 				findEncyclopedia,findMessageFromForum,findWebSites,findNoAuthorReference);
 		
 		rightMenu.setAlignment(Pos.CENTER);
-		
-		//=====================================================================
 		
 		BorderPane borderPane = new BorderPane();
 		borderPane.setLeft(leftMenu);
@@ -216,21 +192,26 @@ public class ChooseDocxDocument extends Application{
 		window.setScene(mainScene);
 		window.show();
 	}
+
+	private void extracted(FindTranslateSource translaterReference, Button findTranslate) {
+		findTranslate.setOnAction(e -> {
+			trans = translaterReference.findTranslateSource(list);
+			listView.getItems().removeAll(list);
+			for(int i=0;i<trans.size();i++) {
+				listView.getItems().add(trans.get(i));
+			}
+		});
+	}
 	
 	public String readFile(String path) {
 		extractor = new ExtractDocxDocument();
 		String text = extractor.readDocxDocument(path);
-		System.out.println(text);
 		return text;
 	}
 	
 	public List<String> findReferences(String text){
 		List<String> references = new ArrayList<>();
 		references = extractor.startWithReferences(text);
-		
-		for(int i=0;i<references.size();i++) {
-			System.out.println(i + " : " + references.get(i));
-		}
 		return references;
 	}
 	

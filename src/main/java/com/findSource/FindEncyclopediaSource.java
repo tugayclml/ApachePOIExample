@@ -19,4 +19,13 @@ public class FindEncyclopediaSource {
 		}
 		return encyclopediaSource;
 	}
+	
+	public Boolean isEncyclopediaReference(String reference) {
+		CharSequence cs="içinde",cs2="Ýçinde";
+		if(reference.contains(cs) || reference.contains(cs2)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

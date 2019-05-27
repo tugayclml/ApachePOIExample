@@ -23,4 +23,13 @@ public class FindEditorSource {
 		return editorSource;
 	}
 	
+	public Boolean isEditorReference(String reference) {
+		CharSequence cs = "Ed.",cs2="Eds.";
+		if(reference.contains(cs) || reference.contains(cs2)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 }

@@ -22,4 +22,13 @@ public class FindThesisSource {
 		return thesisSource;
 	}
 	
+	public Boolean isThesisReference(String reference) {
+		CharSequence cs="Üniversitesi" , cs2="University",cs3="tezi",cs4="thesis";
+		boolean isTrue;
+		if(reference.contains(cs) || reference.contains(cs2) || reference.contains(cs3) || reference.contains(cs4)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

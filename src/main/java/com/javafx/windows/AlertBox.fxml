@@ -28,7 +28,7 @@
             </GridPane>
          </bottom>
          <center>
-            <Label prefHeight="86.0" prefWidth="336.0" text="Your document is not word file.Please choose your word document!" textAlignment="CENTER" textFill="RED" wrapText="true" BorderPane.alignment="CENTER">
+            <Label prefHeight="86.0" prefWidth="336.0" fx:id="warningMessage" textAlignment="CENTER" textFill="RED" wrapText="true" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>

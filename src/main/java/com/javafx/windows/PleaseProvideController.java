@@ -38,7 +38,6 @@ public class PleaseProvideController {
 		File file = fileChooser.showOpenDialog(null);
 		if (file != null) {
 			path = file.getAbsolutePath();
-			System.out.println("Path : " + path);
 			if (ControlPath(path)) {
 				content = readFile(path);
 				textArea.setText(content);
@@ -50,7 +49,7 @@ public class PleaseProvideController {
 			
 			if(ControlPath(path)) {
 				FXMLLoader Loader = new FXMLLoader();
-				Loader.setLocation(getClass().getResource("SecondScreen.fxml"));
+				Loader.setLocation(getClass().getResource("ChoosesSenario.fxml"));
 
 				try {
 					Loader.load();
@@ -58,7 +57,7 @@ public class PleaseProvideController {
 					Logger.getLogger(PleaseProvideController.class.getName()).log(Level.SEVERE, null, e);
 				}
 
-				FXMLController fxmlController = Loader.getController();
+				ChooseScenerioController fxmlController = Loader.getController();
 				fxmlController.getTextFromTextArea(textArea.getText());
 
 				Parent p = Loader.getRoot();
@@ -68,6 +67,7 @@ public class PleaseProvideController {
 				stage.setTitle("Show References Screen");
 				stage.setScene(scene);
 				stage.showAndWait();
+				
 			}else {
 				FXMLLoader Loader2 = new FXMLLoader();
 				Loader2.setLocation(getClass().getResource("AlertBox.fxml"));
@@ -77,6 +77,9 @@ public class PleaseProvideController {
 				} catch (Exception e) {
 					Logger.getLogger(AlertBoxController.class.getName()).log(Level.SEVERE, null, e);
 				}
+				
+				AlertBoxController alert = Loader2.getController();
+				alert.setWarningMessage("Your document is not word file.Please choose word file!");
 				
 				Parent p2 = Loader2.getRoot();
 				Stage stage2 = new Stage();
@@ -93,7 +96,6 @@ public class PleaseProvideController {
 	public String readFile(String path) {
 		extractor = new ExtractDocxDocument();
 		String text = extractor.readDocxDocument(path);
-		System.out.println(text);
 		return text;
 	}
 

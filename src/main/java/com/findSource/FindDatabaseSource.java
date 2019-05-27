@@ -19,4 +19,13 @@ public class FindDatabaseSource {
 		}
 		return databaseSource;
 	}
+	
+	public Boolean isDatabaseReference(String reference) {
+		CharSequence cs = "database",cs2 = "veri tabanı";
+		if(reference.contains(cs) || reference.contains(cs2)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

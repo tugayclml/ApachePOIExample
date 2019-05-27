@@ -21,4 +21,12 @@ public class FindWebSiteSource {
 		return webSiteSource;
 	}
 	
+	public Boolean isWebSiteReference(String reference) {
+		CharSequence cs = "http:",cs2 = "https:";
+		if(reference.contains(cs) || reference.contains(cs2)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

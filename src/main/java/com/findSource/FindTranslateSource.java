@@ -22,4 +22,13 @@ public class FindTranslateSource {
 		return translateSource;
 	}
 	
+	public Boolean isTranslateReference(String reference) {
+		CharSequence cs = "Çev.",cs2="Trans.";
+		if(reference.contains(cs) || reference.contains(cs2)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 }

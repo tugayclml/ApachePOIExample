@@ -19,4 +19,13 @@ public class NoAuthorNoDateSource {
 		}
 		return noAuthorNoDateSource;
 	}
+	
+	public Boolean isNoAuthorReference(String reference) {
+		CharSequence cs="(b.t.)",cs2="(n.d.)";
+		if(reference.contains(cs) || reference.contains(cs2)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

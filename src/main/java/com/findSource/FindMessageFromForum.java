@@ -20,5 +20,14 @@ public class FindMessageFromForum {
 		}
 		return forumSource;
 	}
+	
+	public Boolean isMessageFromForumReference(String reference) {
+		CharSequence cs = "[Msg-";
+		if(reference.contains(cs)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 
 }

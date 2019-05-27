@@ -2,6 +2,8 @@ package com.javafx.windows;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.findSource.AudioVisualMedia;
 import com.findSource.FindBrochureSource;
@@ -13,12 +15,18 @@ import com.findSource.FindThesisSource;
 import com.findSource.FindTranslateSource;
 import com.findSource.FindWebSiteSource;
 import com.findSource.NoAuthorNoDateSource;
+import com.httprequest.Requests;
 
 import example_TextReading.ExtractDocxDocument;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class FXMLController {
 
@@ -32,6 +40,7 @@ public class FXMLController {
 	FindMessageFromForum messageFromForumReference = new FindMessageFromForum();
 	FindWebSiteSource webSiteReference = new FindWebSiteSource();
 	NoAuthorNoDateSource noAuthorReference = new NoAuthorNoDateSource();
+	Requests postRequest = new Requests();
 
 	String path = null, content = null;
 	List<String> list = new ArrayList<>();
@@ -42,14 +51,39 @@ public class FXMLController {
 
 	@FXML
 	private ListView<String> listView = new ListView<String>();
+	
+	@FXML
+	private Button button;
 
 	@FXML
 	void clickShowReferenceButton(ActionEvent event) {
+		List<String> allreferences = new ArrayList<>();
 		list = findReferences(content);
 		listView.getItems().removeAll(list);
 		for (int i = 0; i < list.size(); i++) {
 			listView.getItems().add(list.get(i));
+			allreferences.add(list.get(i));
 		}
+		
+		FXMLLoader aodLoader = new FXMLLoader();
+		aodLoader.setLocation(getClass().getResource("AcceptORDecline.fxml"));
+		
+		try {
+			aodLoader.load();
+		} catch (Exception e) {
+			Logger.getLogger(PleaseProvideController.class.getName()).log(Level.SEVERE, null, e);
+		}
+		
+		AcceptORDeclineController references = aodLoader.getController();
+		references.getListFromReferences(allreferences);
+		
+		Parent p = aodLoader.getRoot();
+		Stage stage = new Stage();
+		Scene scene = new Scene(p);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		stage.setTitle("Accept or Decline");
+		stage.setScene(scene);
+		stage.showAndWait();
 	}
 
 	@FXML
@@ -58,7 +92,6 @@ public class FXMLController {
 		audio = audioReference.findAudioVisualMediaSource(list);
 		listView.getItems().removeAll(list);
 		for (int i = 0; i < audio.size(); i++) {
-			System.out.println(audio.get(i));
 			listView.getItems().add(audio.get(i));
 		}
 	}
@@ -69,7 +102,6 @@ public class FXMLController {
 		brochure = brochureRefenrence.findBrochureSource(list);
 		listView.getItems().removeAll(list);
 		for (int i = 0; i < brochure.size(); i++) {
-			System.out.println(brochure.get(i));
 			listView.getItems().add(brochure.get(i));
 		}
 	}
@@ -80,7 +112,6 @@ public class FXMLController {
 		database = databaseReference.findDatabaseSource(list);
 		listView.getItems().removeAll(list);
 		for (int i = 0; i < database.size(); i++) {
-			System.out.println(database.get(i));
 			listView.getItems().add(database.get(i));
 		}
 	}
@@ -102,7 +133,6 @@ public class FXMLController {
 		encyclopedia = encyclopediaReference.findEncyclopediaSource(list);
 		listView.getItems().removeAll(list);
 		for (int i = 0; i < encyclopedia.size(); i++) {
-			System.out.println(encyclopedia.get(i));
 			listView.getItems().add(encyclopedia.get(i));
 		}
 	}
@@ -113,7 +143,6 @@ public class FXMLController {
 		messageForum = messageFromForumReference.findMessageFromForum(list);
 		listView.getItems().removeAll(list);
 		for (int i = 0; i < messageForum.size(); i++) {
-			System.out.println(messageForum.get(i));
 			listView.getItems().add(messageForum.get(i));
 		}
 	}
@@ -124,7 +153,6 @@ public class FXMLController {
 		noAuthor = noAuthorReference.findNoAuthorNoDate(list);
 		listView.getItems().removeAll(list);
 		for (int i = 0; i < noAuthor.size(); i++) {
-			System.out.println(noAuthor.get(i));
 			listView.getItems().add(noAuthor.get(i));
 		}
 	}
@@ -135,7 +163,6 @@ public class FXMLController {
 		thesis = thesisRefenrence.findThesisSource(list);
 		listView.getItems().removeAll(list);
 		for (int i = 0; i < thesis.size(); i++) {
-			System.out.println(thesis.get(i));
 			listView.getItems().add(thesis.get(i));
 		}
 	}
@@ -146,7 +173,6 @@ public class FXMLController {
 		trans = translaterReference.findTranslateSource(list);
 		listView.getItems().removeAll(list);
 		for (int i = 0; i < trans.size(); i++) {
-			System.out.println(trans.get(i));
 			listView.getItems().add(trans.get(i));
 		}
 	}
@@ -157,7 +183,6 @@ public class FXMLController {
 		webSites = webSiteReference.findWebSiteSource(list);
 		listView.getItems().removeAll(list);
 		for (int i = 0; i < webSites.size(); i++) {
-			System.out.println(webSites.get(i));
 			listView.getItems().add(webSites.get(i));
 		}
 	}
@@ -166,14 +191,10 @@ public class FXMLController {
 		List<String> references = new ArrayList<>();
 		ExtractDocxDocument extractor = new ExtractDocxDocument();
 		references = extractor.startWithReferences(text);
-
-		for (int i = 0; i < references.size(); i++) {
-			System.out.println(i + " : " + references.get(i));
-		}
 		return references;
 	}
 
-	public void getTextFromTextArea(String content) {
+	public void setTextFromTextArea(String content) {
 		this.content = content;
 	}
 

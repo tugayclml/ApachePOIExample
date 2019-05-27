@@ -3,45 +3,39 @@
   <groupId>com.example.ApachePOI</groupId>
   <artifactId>ApachePOIExample</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
   
   <build>
   	<plugins>
-
-            <plugin>
-                <groupId>com.zenjava</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>1.2</version>
-                <configuration>
-
-                    <!-- executable JAR file is built by default (not optional at this stage) -->
-                    <mainClass>com.fxScene.JavaFxStartPage</mainClass>
-
-                    <!-- optionally override settings (such as jar file name, html file, etc) -->
-                    <jarFileName>ParseSources.jar</jarFileName>
-
-                    <!-- optionally sign the jar file if security is needed -->
-                    <!--
-                        to create keystore use command line:
-                            keytool -genkey -alias example-user -keystore keystore.jks
-                    -->
-                    <signJar>
-                        <alias>example-user</alias>
-                        <storePassword>example-password</storePassword>
-                    </signJar>
-
-                    <!-- optionally build webstart bundle -->
-                    <webstart>
-                        <requiresAllPermissions>true</requiresAllPermissions>
-                    </webstart>
-
-                    <!-- optionally build native installers -->
-                    <nativeInstallers/>
-
-                </configuration>
-            </plugin>
-
+           <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-compiler-plugin</artifactId>
+	            <configuration>
+	                <source>1.8</source>
+	                <target>1.8</target>
+	            </configuration>
+	        </plugin>
         </plugins>
   </build>
+  
+  	<properties>
+	 <maven.compiler.source>1.8</maven.compiler.source>
+	 <maven.compiler.target>1.8</maven.compiler.target>
+	 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+  
+  	<repositories>
+  		<repository>
+		    <id>AsposeJavaAPI</id>
+		    <name>Aspose Java API</name>
+		    <url>https://repository.aspose.com/repo/</url>
+		</repository>
+		<repository>
+            <id>com.e-iceblue</id>
+            <name>e-iceblue</name>
+            <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>
+        </repository>
+  	</repositories>
   
   <dependencies>
   	<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
@@ -69,7 +63,45 @@
 	    <artifactId>poi-scratchpad</artifactId>
 	    <version>3.2-FINAL</version>
 	</dependency>
-	
+	<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+	<dependency>
+	    <groupId>org.apache.httpcomponents</groupId>
+	    <artifactId>httpclient</artifactId>
+	    <version>4.5.6</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.itextpdf</groupId>
+	    <artifactId>itextpdf</artifactId>
+	    <version>5.5.10</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.itextpdf.tool</groupId>
+	    <artifactId>xmlworker</artifactId>
+	    <version>5.5.10</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.spire-math/spire -->
+	<dependency>
+	    <groupId>org.spire-math</groupId>
+	    <artifactId>spire_2.11</artifactId>
+	    <version>0.11.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.aspose</groupId>
+	    <artifactId>aspose-pdf</artifactId>
+	    <version>19.3</version>
+	</dependency>
+	<dependency>
+        <groupId> e-iceblue </groupId>
+        <artifactId>spire.pdf</artifactId>
+        <version>2.2.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.json/json -->
+	<dependency>
+	    <groupId>org.json</groupId>
+	    <artifactId>json</artifactId>
+	    <version>20160810</version>
+	</dependency>
+    
 	
   </dependencies>
 </project>

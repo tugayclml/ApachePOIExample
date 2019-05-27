@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="273.0" prefWidth="557.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.windows.ChooseScenerioController">
+   <children>
+      <Button fx:id="button" layoutX="31.0" layoutY="138.0" mnemonicParsing="false" onAction="#showReference" prefHeight="61.0" prefWidth="230.0" text="Show References">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="button" layoutX="299.0" layoutY="138.0" mnemonicParsing="false" onAction="#controlFromSource" prefHeight="61.0" prefWidth="230.0" text="Control From Source">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="157.0" layoutY="58.0" prefHeight="55.0" prefWidth="230.0" text="What do you want?" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Arial Black" size="22.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
